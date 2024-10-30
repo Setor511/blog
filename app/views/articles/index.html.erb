@@ -1,4 +1,11 @@
-<h1>Articles#index</h1>
-<p>Find me in app/views/articles/index.html.erb</p>
-<p>esta es mi primera vista en rails </p>
-<p> :p </p>
+<h1>Artículos</h1>
+
+<ul>
+  <% @articles.each do |article| %>
+    <li>
+      <h2><%= article.title %></h2>
+      <p><%= article.body %></p>
+    </li>
+    <hr/>
+  <% end %>
+</ul>
