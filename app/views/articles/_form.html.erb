@@ -1,0 +1,25 @@
+<%= form_with model: article do |form| %> <%# creo un formulario con el modelo @article (genero un bloque)%>
+    <div>
+        <%# cada campo tiene su label/etiqueta y el input/entrada de datos según el tipo correspondiente al campo %>
+        <%= form.label :title %><br>
+        <%= form.text_field :title %><br>
+        <%# si existen errores por validación se muestran con este bloque de código %>
+        <% @article.errors.full_messages_for(:title).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+
+    <div>
+        <%= form.label :body %><br>
+        <%= form.text_area :body %><br>
+        <% @article.errors.full_messages_for(:body).each do |message| %>
+            <div><%= message %></div>
+        <% end %>
+    </div>
+
+    <div>
+        <%# genera el botón para enviar el formulario con los datos llenados %>
+        <%= form.submit %>
+    </div>
+
+<% end %>
