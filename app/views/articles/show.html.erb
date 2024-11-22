@@ -10,3 +10,10 @@
                   } %></li>
 </ul>
 <%= link_to 'Volver a la lista de artículos', articles_path, class: 'btn btn-primary' %>
+
+<h4> Comentarios: </h4>
+<%= render @article.comments %>
+
+
+<h4>Agregar un comentario:</h4>
+<%= render "comments/form", article: @article %>
