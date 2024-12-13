@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Blog 1" %></title>
+    <title><%= content_for(:title) || "Blog 4" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -17,12 +17,40 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/views/stylesheets %>
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "https://cdn.simplecss.org/simple.css" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <nav class="navbar">
+        <% if user_signed_in? %>
+          <!-- Mostrar correo y botón de cerrar sesión -->
+          <span>Bienvenido, <%= current_user.email %></span>
+          <%= button_to "Cerrar sesión", destroy_user_session_path, method: :delete, class: "btn btn-logout" %>
+        <% else %>
+          <!-- Mostrar botón de iniciar sesión -->
+          <%= link_to "Iniciar sesión", new_user_session_path, class: "btn btn-login" %>
+        <% end %>
+      </nav>
+    </header>
+
+    <main>
+      <% if flash.any? %>
+        <div class="flash-messages">
+          <% flash.each do |key, message| %>
+            <div class="alert <%= key %>">
+              <%= message %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </main>
+    <footer>
+      <p>&copy; 2024 Mi Aplicación</p>
+    </footer>
   </body>
 </html>
