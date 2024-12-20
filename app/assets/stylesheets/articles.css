@@ -1,0 +1,104 @@
+/* Separador personalizado */
+  hr.my-4 {
+    border: 1px solid #ddd;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos de los botones */
+  .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+
+  .button-group {
+    display: flex; /* Usa flexbox para alinear los elementos */
+    gap: 10px; /* Espacio entre los botones */
+    justify-content: flex-start; /* Alinea los botones al inicio (puedes cambiarlo a center o space-between si lo necesitas) */
+  }
+  
+  .button-group .btn {
+    flex-shrink: 0; /* Evita que los botones se reduzcan si no hay espacio suficiente */
+  }
+  
+
+  /* Estilos para el artículo */
+  .article-container {
+    border: 1px solid #e0e0e0; /* borde suave */
+    padding: 20px; /* espacio interno */
+    margin-bottom: 20px; /* espacio debajo del artículo */
+    border-radius: 8px; /* bordes redondeados */
+    background-color: #1f1e1e; /* fondo blanco */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* sombra suave */
+   }
+  
+  .article-container:hover {
+    border-color: #007bff; /* color del borde al pasar el mouse */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); /* sombra más pronunciada al pasar el mouse */
+    background-color: #585757; /* fondo ligeramente diferente en hover */
+  }
+
+  .article-content {
+    font-size: 16px; /* Tamaño de fuente del artículo */
+    line-height: 1.6; /* Espacio entre líneas */
+  }
+
+  /* Estilos para los comentarios */
+  .comments-container {
+    margin-top: 20px;
+  }
+  
+  .comment {
+    border: 1px solid #e0e0e0; /* borde suave */
+    padding: 15px;
+    margin-bottom: 10px; /* espacio entre comentarios */
+    border-radius: 8px; /* bordes redondeados */
+    background-color: #201f1f; /* fondo suave */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* sombra sutil */
+    font-size: 14px; /* Disminuye el tamaño de la fuente en los comentarios */
+    line-height: 1.4; /* Ajusta el espacio entre líneas para mejorar la legibilidad */
+  }
+
+  .comment p {
+    margin-bottom: 10px; /* Espacio entre los párrafos dentro del comentario */
+  }
+  
+  .comment:hover {
+    border-color: #007bff; /* color de borde cuando el comentario está en hover */
+    background-color: #3b3939; /* fondo ligeramente más claro */
+  }
