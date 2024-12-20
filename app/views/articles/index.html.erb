@@ -1,5 +1,5 @@
 <h1>Artículos</h1>
-
+<%= button_to "New article", new_article_path, method: :get, class: "btn btn-primary" %>
 <ul>
   <% @articles.each do |article| %>
     <li>
@@ -13,3 +13,4 @@
     <hr/>
   <% end %>
 </ul>
+<%= button_to "New article", new_article_path, method: :get, class: "btn btn-primary" %>

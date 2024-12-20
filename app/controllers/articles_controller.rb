@@ -15,13 +15,18 @@ class ArticlesController < ApplicationController
 
   # toma los params ya filtrados y crea el artículo: si se crea correctamente, lo muestro, si falla, muestro los errores en el mismo new
   def create
-      @article = Article.new(articles_params)
+    @article = Article.new(article_params.merge(user_id: current_user.id))
+
+    respond_to do |format|
       if @article.save
-        redirect_to @article
+        format.html { redirect_to @article, notice: "Article was successfully created." }
+        format.json { render :show, status: :created, location: @article }
       else
-        render :new, status: :unprocessable_entity
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @article.errors, status: :unprocessable_entity }
       end
-   end
+    end
+  end
 
   def edit
     @article = Article.find(params[:id])
