@@ -1,20 +1,23 @@
 class ArticlesController < ApplicationController
+  before_action :set_article, only: %i[ show edit update destroy publish unpublish]
+  before_action :authenticate_user!, only: %i[ edit update destroy publish unpublish]
+  before_action :authorize_article, only: %i[ edit update destroy publish unpublish]
+
   def index
-    @articles = Article.all
+    @articles = policy_scope(Article)
   end
 
   def show
-    # params = {id: 1}
     @article = Article.find(params[:id])
   end
 
-  # muestra el formulario
   def new
-      @article = Article.new
+    authorize Article
+    @article = Article.new
   end
 
-  # toma los params ya filtrados y crea el artículo: si se crea correctamente, lo muestro, si falla, muestro los errores en el mismo new
   def create
+    authorize Article
     @article = Article.new(article_params.merge(user_id: current_user.id))
 
     respond_to do |format|
@@ -29,12 +32,10 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
   end
 
   def update
-    @article = Article.find(params[:id])
-    if @article.update(articles_params)
+    if @article.update(article_params)
       redirect_to @article
     else
       render :edit, status: :unprocessable_entity
@@ -42,14 +43,41 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
     @article.destroy
 
     redirect_to articles_path, status: :see_other
   end
 
+  def publish
+    authorize @article  # Autoriza la acción 'publish'
+
+    if @article.update(publication_state: :published)
+      redirect_to @article, notice: "Artículo publicado con éxito."
+    else
+      redirect_to @article, alert: "No se pudo publicar el artículo."
+    end
+  end
+
+  def unpublish
+    authorize @article  # Autoriza la acción 'unpublish'
+
+    if @article.update(publication_state: :draft)
+      redirect_to @article, notice: "Artículo vuelto a borrador."
+    else
+      redirect_to @article, alert: "No se pudo cambiar el estado del artículo."
+    end
+  end
+
   private
+    def set_article
+      @article = Article.find(params.expect(:id))
+    end
+
     def article_params
       params.require(:article).permit(:title, :body)
+    end
+
+    def authorize_article
+      authorize @article
     end
 end
